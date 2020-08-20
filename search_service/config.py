@@ -12,9 +12,12 @@ PROXY_USER = 'PROXY_USER'
 PROXY_PASSWORD = 'PROXY_PASSWORD'
 PROXY_CLIENT = 'PROXY_CLIENT'
 PROXY_CLIENT_KEY = 'PROXY_CLIENT_KEY'
+PROXY_PROJECT_ID = 'PROXY_PROJECT_ID'
+PROXY_CREDENTIALS_FILE = 'PROXY_CREDENTIALS_FILE'
 PROXY_CLIENTS = {
     'ELASTICSEARCH': 'search_service.proxy.elasticsearch.ElasticsearchProxy',
-    'ATLAS': 'search_service.proxy.atlas.AtlasProxy'
+    'ATLAS': 'search_service.proxy.atlas.AtlasProxy',
+    'GCP_DATA_CATALOG': 'search_service.proxy.gcp_data_catalog.GCPDataCatalogProxy'
 }
 
 
@@ -50,6 +53,10 @@ class LocalConfig(Config):
     PROXY_CLIENT_KEY = os.environ.get('PROXY_CLIENT_KEY')
     PROXY_USER = os.environ.get('CREDENTIALS_PROXY_USER', 'elastic')
     PROXY_PASSWORD = os.environ.get('CREDENTIALS_PROXY_PASSWORD', 'elastic')
+
+    # Variables required for GCP Data Catalog Proxy
+    PROXY_PROJECT_ID = os.environ.get('PROXY_PROJECT_ID')
+    PROXY_CREDENTIALS_FILE = os.environ.get('CREDENTIALS_PROXY_FILE')
 
     SWAGGER_ENABLED = True
     SWAGGER_TEMPLATE_PATH = os.path.join('api', 'swagger_doc', 'template.yml')

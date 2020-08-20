@@ -66,7 +66,8 @@ class ElasticsearchProxy(BaseProxy):
                  user: str = '',
                  password: str = '',
                  client: Elasticsearch = None,
-                 page_size: int = 10
+                 page_size: int = 10,
+                 **kwargs
                  ) -> None:
         """
         Constructs Elasticsearch client for interactions with the cluster.

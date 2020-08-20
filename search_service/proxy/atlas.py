@@ -34,7 +34,8 @@ class AtlasProxy(BaseProxy):
                  user: str = '',
                  password: str = '',
                  client: Atlas = None,
-                 page_size: int = 10) -> None:
+                 page_size: int = 10,
+                 **kwargs) -> None:
         self.atlas = client or Atlas(host, username=user, password=password)
         self.page_size = page_size
 

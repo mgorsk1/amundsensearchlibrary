@@ -35,11 +35,16 @@ def get_proxy_client() -> BaseProxy:
             host = current_app.config[config.PROXY_ENDPOINT]
             user = current_app.config[config.PROXY_USER]
             password = current_app.config[config.PROXY_PASSWORD]
+
+            project_id = current_app.config[config.PROXY_PROJECT_ID]
+            credentials_file = current_app.config[config.PROXY_CREDENTIALS_FILE]
+
             client = import_string(current_app.config[config.PROXY_CLIENT])
 
             # number of results per search page
             page_size = current_app.config.get(config.SEARCH_PAGE_SIZE_KEY, DEFAULT_PAGE_SIZE)
 
-            _proxy_client = client(host=host, user=user, password=password, client=obj, page_size=page_size)
+            _proxy_client = client(host=host, user=user, password=password, client=obj, page_size=page_size,
+                                   project_id=project_id, credentials_file=credentials_file)
 
     return _proxy_client
