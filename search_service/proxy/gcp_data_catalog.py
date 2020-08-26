@@ -172,19 +172,24 @@ class GCPDataCatalogProxy(BaseProxy):
         results = self.client.search_catalog(query=query, scope=self.scope, page_size=self.page_size).pages
 
         total_count = 0
-        i = 0
+        page_index_position = 0
 
         for page in results:
-            if i == page_index:
-                for element in page:
-                    i += 1
+            current_page_count = 0
+
+            total_count += self.page_size
+
+            for element in page:
+                current_page_count += 1
+
+                if page_index_position == page_index:
                     result = self._process_resource(element, entry_type)
 
                     entries.append(result)
 
-            total_count += self.page_size
+            page_index_position += 1
 
-        total_count = i if i < self.page_size else total_count
+        total_count = total_count - (self.page_size - current_page_count)
 
         return total_count, entries
 
