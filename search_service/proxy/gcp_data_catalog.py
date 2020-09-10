@@ -124,7 +124,7 @@ class GCPDataCatalogProxy(BaseProxy):
                            product=entry.user_specified_system or entry.integrated_system,
                            name=dashboard_metadata['workbook_name'],
                            last_successful_run_timestamp=0,
-                           uri=dashboard_metadata['workbook_entry'])
+                           uri=full_entry.name)
 
         return result
 
